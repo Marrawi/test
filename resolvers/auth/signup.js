@@ -78,7 +78,7 @@ module.exports = {
 
       await db.saveDatabase();
 
-      const emailResult = await sendEmail(user.username, user.email, verifyToken, 'verify')
+      const emailResult = await sendEmail(username, email, verifyToken, 'verify')
       if (!emailResult) { return AppError('Email_Sending_Error'); }
 
       // return the result to API

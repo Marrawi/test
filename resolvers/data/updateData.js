@@ -20,10 +20,12 @@ module.exports = {
       const phone = await User.findOne({ phone: args.phone });
       if (phone) { return AppError('Phone_Unique'); }
 
-      const update = await User.updateOne( { _id: req.userId }, { $set: { phoneType: args.phoneType, phone: args.phone }});
+      user.phoneType = args.phoneType;
+      user.phone = args.phone;
 
-      // find the User in Database via username
-      user = await User.findById(req.userId);
+      for (var i = 0; i < user.userIP.length; i++) { if ( user.userIP[i].ip != req.ip ) { user.userIP.push(req.ip); break; } }
+
+      user.save();
 
       // find all Work data in Database and select userFeed only for the same user
       const work = await Work.find({},{ _id: 1,name: 1, timeToFinish: 1, paid: 1, isOpen: 1, priority: 1,

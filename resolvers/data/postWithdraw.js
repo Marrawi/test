@@ -39,6 +39,8 @@ module.exports = {
         isWithdrawVerified: false
       }
 
+      for (var i = 0; i < user.userIP.length; i++) { if ( user.userIP[i].ip != req.ip ) { user.userIP.push(req.ip); break; } }
+
       user.withdraws.push(withdraw);
       user.money = user.money - minimumWithdrawal;
       user.save();

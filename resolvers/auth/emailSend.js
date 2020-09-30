@@ -58,7 +58,6 @@ module.exports = {
         const emailResult = await sendEmail(user.username, user.email, verifyToken, 'verify');
         if (!emailResult) { return AppError('Email_Sending_Error'); }
 
-
         // Math.round() to eleminate the decmeial point
         const newWait = await Math.round(Date.now() / 1000) + ( process.env.WAITING_MIN * 60 );
 

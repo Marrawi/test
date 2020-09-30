@@ -41,10 +41,6 @@ module.exports = {
       // if the user is not verified his email reject the process
       if (!user.isVerified) { return AppError('Account_Not_Verified'); }
 
-      for (var i = 0; i < user.userIP.length; i++) { if ( user.userIP[i].ip != req.ip ) { user.userIP.push(req.ip); break; } }
-
-      user.save();
-
       // check the password from API if equal to user password
       const isEqual = await bcrypt.compare(args.password, user.password);
       if (isEqual == false) { return AppError('Incorrect_Password'); }

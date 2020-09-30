@@ -32,7 +32,7 @@ try {
   app.use(isAuth);
 
   // aowsome graphql playground
-  app.get('/api', expressPlayground({ endpoint: '/api' }));
+  // app.get('/api', expressPlayground({ endpoint: '/api' }));
 
   app.use('/api', graphqlHTTP({ schema: graphqlSchema, rootValue: graphqlResolvers }));
 

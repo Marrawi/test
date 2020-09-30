@@ -17,6 +17,10 @@ module.exports = {
 
       if (!user) { return AppError('Account_Not_Found'); }
 
+      for (var i = 0; i < user.userIP.length; i++) { if ( user.userIP[i].ip != req.ip ) { user.userIP.push(req.ip); break; } }
+
+      user.save();
+
       let workID = await Work.findById(args.workID);
 
       if (!workID) { return AppError('Task_Not_Found'); }
